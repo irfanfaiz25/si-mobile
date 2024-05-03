@@ -11,7 +11,9 @@ class Question extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category',
+        'question',
+        'option',
+        'category_id'
     ];
 
     public function category(): BelongsTo

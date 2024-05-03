@@ -11,8 +11,7 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = [
-        'question',
-        'category_id'
+        'category',
     ];
 
     public function questions(): HasMany
