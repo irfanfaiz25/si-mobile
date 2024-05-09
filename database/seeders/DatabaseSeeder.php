@@ -16,37 +16,47 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         DB::table('categories')->insert([
-            'category' => 'Performance',
+            'name' => 'performance',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('categories')->insert([
-            'category' => 'Information',
+            'name' => 'information',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'control',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('questions')->insert([
-            'question' => 'Kecepatan pelayanan?',
-            'option' => 'baik',
+            'text' => 'Kecepatan pelayanan?',
             'category_id' => 1,
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('questions')->insert([
-            'question' => 'Kecekatan perawat?',
-            'option' => 'efisien',
+            'text' => 'Kecekatan perawat?',
             'category_id' => 1,
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('questions')->insert([
-            'question' => 'Pemberian informasi?',
-            'option' => 'baik',
+            'text' => 'Pemberian informasi?',
             'category_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('questions')->insert([
+            'text' => 'Pemberian keamanan?',
+            'category_id' => 3,
             'created_at' => now(),
             'updated_at' => now()
         ]);

@@ -16,3 +16,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('user.user');
 });
+
+Route::get('/admin', function () {
+    return view('admin.dashboard');
+});
+
+Route::get('/dashboard', function () {
+    return view('admin.dashboard', [
+        'active_link' => 'dashboard'
+    ]);
+})->name('dashboard');
+
+Route::get('/question-data/{category}', function ($category) {
+    return view('admin.question-data', [
+        'category' => $category,
+        'active_link' => $category
+    ]);
+})->name('question-data');
