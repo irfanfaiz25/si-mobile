@@ -8,14 +8,16 @@
             </button>
             <ul class="flex items-center text-sm ml-4">
                 <li class="mr-2">
-                    <p class="text-gray-600 font-medium">Data Pertanyaan</p>
+                    <p class="text-gray-400 font-medium">Data Pertanyaan</p>
                 </li>
+                <li class="text-gray-600 mr-2 font-medium">/</li>
+                <li class="text-gray-600 mr-2 font-medium">Tambah</li>
             </ul>
         </div>
         <div class="p-6">
             <div class="grid grid-cols-1 gap-6 mb-6">
 
-                @livewire('question-data-table', ['category' => $category], key($category))
+                @livewire('add-question-form')
 
             </div>
         </div>

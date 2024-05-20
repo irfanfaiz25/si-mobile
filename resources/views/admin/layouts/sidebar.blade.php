@@ -5,7 +5,11 @@
         <span class="text-lg font-bold text-white ml-3">Logo</span>
     </a>
 
-    @livewire('admin-sidebar', ['active_link' => $active_link])
+    @if (isset($tab))
+        @livewire('admin-sidebar', ['active_link' => $active_link, 'tab' => $tab])
+    @else
+        @livewire('admin-sidebar', ['active_link' => $active_link, 'tab' => ''])
+    @endif
 
 </div>
 <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>

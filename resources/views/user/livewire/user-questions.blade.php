@@ -8,9 +8,8 @@
             </div>
             <div class="flex-grow p-4">
                 <input wire:model='respondentName'
-                    class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                    class="appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 px-2 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-indigo-600 peer"
                     id="name" type="text" placeholder="Enter your name">
-                <div class="border-b border-gray-500"></div>
             </div>
         </div>
         <div class="flex">
@@ -21,13 +20,12 @@
             </div>
             <div class="flex-grow p-4">
                 <select wire:model='respondentGender'
-                    class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                    class="appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 px-2 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-indigo-600 peer"
                     id="gender" type="text">
                     <option value="" selected>-- Pilih --</option>
                     <option value="laki-laki">laki-laki</option>
                     <option value="perempuan">perempuan</option>
                 </select>
-                <div class="border-b border-gray-500"></div>
             </div>
         </div>
         <div class="flex">
@@ -38,9 +36,8 @@
             </div>
             <div class="flex-grow p-4">
                 <input wire:model='date'
-                    class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                    class="appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 px-2 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-indigo-600 peer"
                     id="date" type="date">
-                <div class="border-b border-gray-500"></div>
             </div>
         </div>
 
@@ -58,28 +55,27 @@
             </label> --}}
                 <div class="block md:flex items-center text-gray-700 mt-1 ml-5">
                     <input wire:model='answers.{{ $question->id }}' type="radio" id="option1{{ $question->id }}"
-                        class="mr-1" value="sangat tidak {{ $this->optionCategory($question->category->name) }}">
+                        class="mr-1" value="sangat tidak {{ $question->answer_option }}">
                     <label for="option1{{ $question->id }}" class="mr-4">sangat tidak
-                        {{ $this->optionCategory($question->category->name) }}</label>
+                        {{ $question->answer_option }}</label>
 
                     <input wire:model='answers.{{ $question->id }}' type="radio" id="option2{{ $question->id }}"
-                        class="mr-1" value="tidak {{ $this->optionCategory($question->category->name) }}">
+                        class="mr-1" value="tidak {{ $question->answer_option }}">
                     <label for="option2{{ $question->id }}" class="mr-4">tidak
-                        {{ $this->optionCategory($question->category->name) }}</label>
+                        {{ $question->answer_option }}</label>
 
                     <input wire:model='answers.{{ $question->id }}' type="radio" id="option3{{ $question->id }}"
                         class="mr-1" value="ragu-ragu">
                     <label for="option3{{ $question->id }}" class="mr-4">ragu-ragu</label>
 
                     <input wire:model='answers.{{ $question->id }}' type="radio" id="option4{{ $question->id }}"
-                        class="mr-1" value="{{ $this->optionCategory($question->category->name) }}">
-                    <label for="option4{{ $question->id }}"
-                        class="mr-4">{{ $this->optionCategory($question->category->name) }}</label>
+                        class="mr-1" value="{{ $question->answer_option }}">
+                    <label for="option4{{ $question->id }}" class="mr-4">{{ $question->answer_option }}</label>
 
                     <input wire:model='answers.{{ $question->id }}' type="radio" id="option5{{ $question->id }}"
-                        class="mr-1" value="sangat {{ $this->optionCategory($question->category->name) }}">
+                        class="mr-1" value="sangat {{ $question->answer_option }}">
                     <label for="option5{{ $question->id }}" class="mr-4">sangat
-                        {{ $this->optionCategory($question->category->name) }}</label>
+                        {{ $question->answer_option }}</label>
 
                 </div>
             @endforeach

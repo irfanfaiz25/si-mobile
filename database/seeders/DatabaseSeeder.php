@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
         DB::table('questions')->insert([
             'text' => 'Kecepatan pelayanan?',
             'category_id' => 1,
+            'answer_option' => 'baik',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -43,6 +44,7 @@ class DatabaseSeeder extends Seeder
         DB::table('questions')->insert([
             'text' => 'Kecekatan perawat?',
             'category_id' => 1,
+            'answer_option' => 'baik',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -50,6 +52,7 @@ class DatabaseSeeder extends Seeder
         DB::table('questions')->insert([
             'text' => 'Pemberian informasi?',
             'category_id' => 2,
+            'answer_option' => 'baik',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -57,6 +60,7 @@ class DatabaseSeeder extends Seeder
         DB::table('questions')->insert([
             'text' => 'Pemberian keamanan?',
             'category_id' => 3,
+            'answer_option' => 'efisien',
             'created_at' => now(),
             'updated_at' => now()
         ]);

@@ -13,7 +13,8 @@ class Question extends Model
 
     protected $fillable = [
         'text',
-        'category_id'
+        'category_id',
+        'answer_option'
     ];
 
     public function category(): BelongsTo

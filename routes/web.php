@@ -30,6 +30,21 @@ Route::get('/dashboard', function () {
 Route::get('/question-data/{category}', function ($category) {
     return view('admin.question-data', [
         'category' => $category,
-        'active_link' => $category
+        'active_link' => $category,
+        'tab' => 'question'
     ]);
 })->name('question-data');
+
+Route::get('/add-question', function () {
+    return view('admin.add-question', [
+        'active_link' => 'question-data',
+        'tab' => 'question'
+    ]);
+})->name('add-question');
+
+Route::get('question-data/{id}/edit', function ($id) {
+    return view('admin.edit-question', [
+        'id' => $id,
+        'active_link' => 'question-data'
+    ]);
+})->name('edit-question');

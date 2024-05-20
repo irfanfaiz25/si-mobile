@@ -7,7 +7,7 @@
                 <span class="text-sm">Dashboard</span>
             </a>
         </li>
-        <li class="mb-1 group {{ $active_link == 'question-data' ? 'active' : '' }}">
+        <li class="mb-1 group {{ isset($tab) && $tab == 'question' ? 'active' : '' }}">
             <a
                 class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
                 <i class="ri-questionnaire-line mr-3 text-lg"></i>

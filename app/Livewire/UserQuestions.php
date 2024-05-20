@@ -35,7 +35,6 @@ class UserQuestions extends Component
         $date = $this->answers['date'];
 
         // Prepare the data for insertion
-        $responses = [];
         foreach ($questionIds as $questionId) {
             Respondent::create([
                 'name' => $respondentName,
@@ -45,9 +44,6 @@ class UserQuestions extends Component
                 'response' => $answers[$questionId],
             ]);
         }
-
-        // Insert data into the respondents table
-        // Respondent::insert($responses);
     }
 
     public function optionCategory($category)
