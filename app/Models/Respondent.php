@@ -10,11 +10,12 @@ class Respondent extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'respondent_code',
         'name',
         'gender',
         'date',
         'question_id',
-        'response'
+        'answer'
     ];
 
     public function question(): BelongsTo

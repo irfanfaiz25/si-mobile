@@ -2,29 +2,40 @@
 
 namespace App\Livewire;
 
+use livewire\Attributes\Validate;
 use App\Models\Category;
 use App\Models\Question;
 use App\Models\Respondent;
 use Livewire\Component;
+use illuminate\Support\Str;
 
 class UserQuestions extends Component
 {
-    // public $questions = [];
-    public $answers = [];
+    // #[Validate('required')]
     public $respondentName;
+
+    // #[Validate('required')]
     public $respondentGender;
+
+    // #[Validate('required')]
     public $date;
+
+    public $answers = [];
 
 
     public function updated($questionId, $value)
     {
-        // dd($questionId, $value, $this->answers);
-
         $this->answers[$questionId] = $value;
     }
 
     public function submit()
     {
+        $this->validate([
+            'respondentName' => 'required',
+            'respondentGender' => 'required',
+            'date' => 'required'
+        ]);
+
         $questionIds = array_keys(array_filter($this->answers, function ($key) {
             return is_numeric($key);
         }, ARRAY_FILTER_USE_KEY));
@@ -34,16 +45,29 @@ class UserQuestions extends Component
         $respondentGender = $this->answers['respondentGender'];
         $date = $this->answers['date'];
 
-        // Prepare the data for insertion
+        $uniqueCode = $this->generateUniqueCode();
+
         foreach ($questionIds as $questionId) {
             Respondent::create([
+                'respondent_code' => $uniqueCode,
                 'name' => $respondentName,
                 'gender' => $respondentGender,
                 'date' => $date,
                 'question_id' => $questionId,
-                'response' => $answers[$questionId],
+                'answer' => $answers[$questionId],
             ]);
         }
+
+        $this->reset('respondentName', 'respondentGender', 'date');
+        $this->answers = [];
+
+        session()->flash('success', 'Terimakasih telah bersedia mengisi kuisioner ini.');
+    }
+
+    public function resetForm()
+    {
+        $this->reset('respondentName', 'respondentGender', 'date');
+        $this->answers = [];
     }
 
     public function optionCategory($category)
@@ -53,6 +77,17 @@ class UserQuestions extends Component
         } else {
             return "baik";
         }
+    }
+
+    public function generateUniqueCode()
+    {
+        $uniqueCode = Str::random(20);
+
+        while (Respondent::where('respondent_code', $uniqueCode)->exists()) {
+            $uniqueCode = Str::random(20);
+        }
+
+        return $uniqueCode;
     }
 
     public function render()

@@ -14,7 +14,7 @@ class AdminSidebar extends Component
     public function mount($active_link, $tab)
     {
         $this->active_link = $active_link;
-        $this->categories = Category::orderBy('id', 'asc')->pluck('name');
+        $this->categories = Category::orderBy('id', 'asc')->get();
         $this->tab = $tab;
     }
 

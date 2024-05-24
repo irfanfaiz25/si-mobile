@@ -48,3 +48,17 @@ Route::get('question-data/{id}/edit', function ($id) {
         'active_link' => 'question-data'
     ]);
 })->name('edit-question');
+
+Route::get('/responden-data', function () {
+    return view('admin.responden-data', [
+        'active_link' => 'responden-data'
+    ]);
+})->name('responden-data');
+
+Route::get('/hasil/{category_id}', function ($category_id) {
+    return view('admin.result-data', [
+        'category_id' => $category_id,
+        'active_link' => $category_id,
+        'tab' => 'result'
+    ]);
+})->name('result-data');

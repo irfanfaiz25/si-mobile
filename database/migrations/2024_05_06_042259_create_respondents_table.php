@@ -12,11 +12,12 @@ return new class extends Migration {
     {
         Schema::create('respondents', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('respondent_code', 255);
             $table->string('name', 100);
             $table->string('gender', 50);
             $table->string('date', 50);
             $table->integer('question_id');
-            $table->string('response', 50);
+            $table->string('answer', 50);
             $table->timestamps();
         });
     }

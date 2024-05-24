@@ -6,17 +6,17 @@
             <div class="lg:max-w-2xl mx-auto bg-white rounded-md shadow-md overflow-hidden border-t-4 border-indigo-500">
                 <div class="px-6 py-4">
                     <h2 class="text-3xl text-center font-semibold text-gray-800">KUISIONER</h2>
-                    <p class="mt-6 text-gray-600">Si-Mobile adalah lorem ipsum dolor sit amet consectetur adipisicing
-                        elit.
-                        Asperiores
-                        exercitationem, vero corporis laborum quam autem maxime quia et, aliquid illo nemo doloribus in
-                        soluta! Autem, aliquid? Et delectus, eos eum tempora repellendus numquam fugiat atque architecto
-                        repudiandae sunt molestiae! Accusamus porro odit dolores, excepturi illum reprehenderit hic
-                        dignissimos suscipit maiores.</p>
+                    <p class="mt-6 text-gray-600">Aplikasi "Simobile RSUD Simo Boyolali" adalah sebuah aplikasi yang dirilis
+                        pada 01 Juli 2019 dikembangkan untuk membantu pengelolaan informasi dan pelayanan di RSUD Simo
+                        Boyolali. Aplikasi ini dirancang untuk mempermudah berbagai kegiatan administratif dan layanan di
+                        RSUD Simo, seperti manajemen pasien, rekam medis, jadwal dokter, daftar anggota keluarga, cek
+                        riwayat kunjunga, kartu elektronik pasien, reservasi pendaftaran rawat jalan online, informasi
+                        ketersediaan bed secara real time, informasi jadwal poli dan dokter, chat online dengan admin, kirim
+                        kritik dan saran online, verifikasi kode lewat email, dan informasi layanan kesehatan lainnya.</p>
                 </div>
                 <hr>
 
-                <livewire:user-questions />
+                @livewire('user-questions')
 
                 <div class="px-6 py-4 bg-gray-100 flex justify-center">
                     <span><i class="fa fa-copyright pr-1"></i>Si-Mobile</span>

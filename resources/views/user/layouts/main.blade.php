@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Si-Mobile</title>
 
+    {{-- logo title --}}
+    <link rel="icon" href="{{ asset('img/simobile-logo.png') }}">
+
     <!-- Include Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
@@ -29,6 +32,12 @@
 
     @yield('content')
 
+
+    {{-- <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.2.1/dist/cdn.min.js" defer></script> --}}
+
+    @stack('script')
+
 </body>
+
 
 </html>
