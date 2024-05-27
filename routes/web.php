@@ -15,17 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('user.user');
-});
-
-Route::get('/admin', function () {
-    return view('admin.dashboard');
-});
+})->name('main-page');
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard', [
         'active_link' => 'dashboard'
     ]);
-})->name('dashboard');
+})->name('dashboard')->middleware('auth');
 
 Route::get('/question-data/{category}', function ($category) {
     return view('admin.question-data', [
@@ -33,27 +29,27 @@ Route::get('/question-data/{category}', function ($category) {
         'active_link' => $category,
         'tab' => 'question'
     ]);
-})->name('question-data');
+})->name('question-data')->middleware('auth');
 
 Route::get('/add-question', function () {
     return view('admin.add-question', [
         'active_link' => 'question-data',
         'tab' => 'question'
     ]);
-})->name('add-question');
+})->name('add-question')->middleware('auth');
 
 Route::get('question-data/{id}/edit', function ($id) {
     return view('admin.edit-question', [
         'id' => $id,
         'active_link' => 'question-data'
     ]);
-})->name('edit-question');
+})->name('edit-question')->middleware('auth');
 
 Route::get('/responden-data', function () {
     return view('admin.responden-data', [
         'active_link' => 'responden-data'
     ]);
-})->name('responden-data');
+})->name('responden-data')->middleware('auth');
 
 Route::get('/hasil/{category_id}', function ($category_id) {
     return view('admin.result-data', [
@@ -61,4 +57,8 @@ Route::get('/hasil/{category_id}', function ($category_id) {
         'active_link' => $category_id,
         'tab' => 'result'
     ]);
-})->name('result-data');
+})->name('result-data')->middleware('auth');
+
+Route::get('/admin', function () {
+    return view('auth.login');
+})->name('login')->middleware('guest');

@@ -16,7 +16,7 @@
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2">
                             <label for="question"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pertanyaan</label>
+                                class="block mb-2 text-sm font-medium text-gray-900">Pertanyaan</label>
                             <textarea wire:model='question' id="question" rows="4"
                                 class="bg-gray-50 border-2 
                                 @error('question')
@@ -31,7 +31,7 @@
                         </div>
                         <div class="col-span-2">
                             <label for="category"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
+                                class="block mb-2 text-sm font-medium text-gray-900">Kategori</label>
                             <select wire:model.change='category_id' id="category"
                                 class="bg-gray-50 border-2 capitalize 
                                 @error('category_id')
@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                             @error('answer_option')
-                                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                <p class="mt-2 text-sm text-red-600">
                                     {{ $message }}
                                 </p>
                             @enderror

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class AdminSidebar extends Component
@@ -16,6 +17,13 @@ class AdminSidebar extends Component
         $this->active_link = $active_link;
         $this->categories = Category::orderBy('id', 'asc')->get();
         $this->tab = $tab;
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect(route('login'));
     }
 
     public function render()

@@ -12,7 +12,7 @@
                     class="@error('respondentName') border-red-500 @enderror appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 px-2 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-indigo-600 peer"
                     id="name" type="text" placeholder="Enter your name">
                 @error('respondentName')
-                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                    <p class="mt-2 text-sm text-red-600">
                         {{ $message }}
                     </p>
                 @enderror
@@ -33,7 +33,7 @@
                     <option value="perempuan">perempuan</option>
                 </select>
                 @error('respondentGender')
-                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                    <p class="mt-2 text-sm text-red-600">
                         {{ $message }}
                     </p>
                 @enderror
@@ -50,7 +50,7 @@
                     class="@error('date') border-red-500 @enderror appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 px-2 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-indigo-600 peer"
                     id="date" type="date">
                 @error('date')
-                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                    <p class="mt-2 text-sm text-red-600">
                         {{ $message }}
                     </p>
                 @enderror

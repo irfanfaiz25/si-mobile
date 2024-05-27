@@ -4,6 +4,8 @@
 
         <div class="flex justify-between mb-4 items-start">
             <div class="font-semibold capitalize">Data Responden</div>
+            <button wire:click='exportReport' type="button"
+                class="bg-gray-200 hover:bg-gray-600 text-gray-600 hover:text-gray-200 font-bold py-2 px-6 mr-2 rounded">Export</button>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full min-w-[540px]" wire:poll.keep-alive.10s='refreshData'>
