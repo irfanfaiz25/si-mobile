@@ -62,6 +62,7 @@
                                         <option selected value="">-Pilih opsi jawaban-</option>
                                         <option value="baik">Baik</option>
                                         <option value="efisien">Efisien</option>
+                                        <option value="puas">Puas</option>
                                     </select>
                                 </div>
                                 <div class="flex-grow">

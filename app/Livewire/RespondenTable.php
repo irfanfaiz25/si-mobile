@@ -4,9 +4,12 @@ namespace App\Livewire;
 
 use App\Models\Question;
 use App\Models\Respondent;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Illuminate\Support\Facades\View;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\On;
 
 
 class RespondenTable extends Component
@@ -20,40 +23,16 @@ class RespondenTable extends Component
 
     public function mount()
     {
-        $questions = Question::with('category')->get();
+        $this->refreshData();
+    }
 
-        $this->questionsGroupedByCategory = $questions->groupBy('category.name')->all();
-
-        $respondents = Respondent::all()->groupBy('respondent_code');
-
-        $this->respondents = $respondents->map(function ($respondentGroup) {
-            $data = [
-                'respondent_code' => $respondentGroup->first()->respondent_code,
-                'respondent_name' => $respondentGroup->first()->name,
-            ];
-
-            foreach ($respondentGroup as $respondent) {
-                $answer = $respondent->answer;
-                $answer_code = 'N/A';
-                if ($answer == 'sangat tidak baik' || $answer == 'sangat tidak efisien') {
-                    $answer_code = '1';
-                } elseif ($answer == 'tidak baik' || $answer == 'tidak efisien') {
-                    $answer_code = '2';
-                } elseif ($answer == 'ragu-ragu') {
-                    $answer_code = '3';
-                } elseif ($answer == 'baik' || $answer == 'efisien') {
-                    $answer_code = '4';
-                } elseif ($answer == 'sangat baik' || $answer == 'sangat efisien') {
-                    $answer_code = '5';
-                }
-
-                $data['Q' . $respondent->question_id] = $answer_code;
-            }
-
-            $this->reportData = $data;
-
-            return $data;
-        });
+    #[On('respondent-deleted')]
+    public function deleteAlert($is_deleted)
+    {
+        if ($is_deleted) {
+            $this->refreshData();
+            session()->flash('success', 'Data responden berhasil di hapus!');
+        }
     }
 
     public function refreshData()
@@ -66,6 +45,7 @@ class RespondenTable extends Component
 
         $this->respondents = $respondents->map(function ($respondentGroup) {
             $data = [
+                'respondent_id' => $respondentGroup->first()->respondent_id,
                 'respondent_code' => $respondentGroup->first()->respondent_code,
                 'respondent_name' => $respondentGroup->first()->name,
             ];
@@ -73,15 +53,15 @@ class RespondenTable extends Component
             foreach ($respondentGroup as $respondent) {
                 $answer = $respondent->answer;
                 $answer_code = 'N/A';
-                if ($answer == 'sangat tidak baik' || $answer == 'sangat tidak efisien') {
+                if ($answer == 'sangat tidak baik' || $answer == 'sangat tidak efisien' || $answer == 'sangat tidak puas') {
                     $answer_code = '1';
-                } elseif ($answer == 'tidak baik' || $answer == 'tidak efisien') {
+                } elseif ($answer == 'tidak baik' || $answer == 'tidak efisien' || $answer == 'tidak puas') {
                     $answer_code = '2';
                 } elseif ($answer == 'ragu-ragu') {
                     $answer_code = '3';
-                } elseif ($answer == 'baik' || $answer == 'efisien') {
+                } elseif ($answer == 'baik' || $answer == 'efisien' || $answer == 'puas') {
                     $answer_code = '4';
-                } elseif ($answer == 'sangat baik' || $answer == 'sangat efisien') {
+                } elseif ($answer == 'sangat baik' || $answer == 'sangat efisien' || $answer == 'sangat puas') {
                     $answer_code = '5';
                 }
 
@@ -94,20 +74,54 @@ class RespondenTable extends Component
         });
     }
 
+    public function deleteRespondent($code)
+    {
+        Respondent::where('respondent_code', $code)->delete();
+
+        $this->dispatch('respondent-deleted', is_deleted: true);
+    }
+
     public function exportReport()
     {
         $data = $this->reportData;
 
-        $pdf = Pdf::loadView('admin.pdf.report', $data, ['respondents' => $this->respondents, 'questionsGroupedByCategory' => $this->questionsGroupedByCategory])->setPaper('a4', 'landscape');
+        // Ensure DOMPDF options are set correctly
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+
+        // Create a new DOMPDF instance
+        $dompdf = new Dompdf($options);
+
+        // Load the HTML from a view
+        $html = View::make('admin.pdf.report', [
+            'data' => $data,
+            'respondents' => $this->respondents,
+            'questionsGroupedByCategory' => $this->questionsGroupedByCategory
+        ])->render();
+
+        // Load HTML to DOMPDF
+        $dompdf->loadHtml($html);
+
+        // Set paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render the PDF
+        $dompdf->render();
+
+        // Output the PDF to the browser
         return response()->streamDownload(
-            fn() => print ($pdf->output()),
-            'report.pdf'
+            function () use ($dompdf) {
+                echo $dompdf->output();
+            },
+            'respondent_table.pdf'
         );
     }
 
+
+
     public function render()
     {
-        // $respondents = Respondent
         return view('admin.livewire.responden-table', [
             'respondents' => $this->respondents,
             'questionsGroupedByCategory' => $this->questionsGroupedByCategory,

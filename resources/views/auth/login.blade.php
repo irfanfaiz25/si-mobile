@@ -16,6 +16,14 @@
         @livewire('login-form')
 
     </section>
+
+    <script>
+        function hideAlert() {
+            var alert = document.getElementById("alert-notification")
+            alert.classList.add("hidden")
+        }
+    </script>
+
 </body>
 
 </html>

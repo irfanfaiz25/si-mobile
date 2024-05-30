@@ -9,9 +9,12 @@ use Livewire\Component;
 class ChartResult extends Component
 {
     public $chartsData = [];
+    public $category_id;
 
     public function mount($category_id)
     {
+        $this->category_id = $category_id;
+
         $questions = Question::with('respondents')->where('category_id', $category_id)->get();
 
         foreach ($questions as $question) {
