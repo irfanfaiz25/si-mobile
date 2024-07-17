@@ -34,6 +34,11 @@
                     </div>
                 </div>
             </div>
+            <div class="grid grid-cols-1 gap-6 mb-6">
+                <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+                    @livewire('gender-chart')
+                </div>
+            </div>
         </div>
     </main>
 @endsection
